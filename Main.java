@@ -8,6 +8,8 @@ import java.util.zip.ZipOutputStream;
 
 public class Main {
 
+    public static String prefix = "d:" + File.separator + "Games" + File.separator + "savegames" + File.separator;
+
     public static void main(String[] args) {
         GameProgress gameProgress1 =
                 new GameProgress(94, 10, 2, 254.32);
@@ -17,22 +19,22 @@ public class Main {
                 new GameProgress(50, 7, 5, 400);
 
         List<String> source = new ArrayList<>();
-        source.add("d:\\Games\\savegames\\save1.dat");
-        source.add("d:\\Games\\savegames\\save2.dat");
-        source.add("d:\\Games\\savegames\\save3.dat");
+        source.add(prefix + "save1.dat");
+        source.add(prefix + "save2.dat");
+        source.add(prefix + "save3.dat");
 
         saveGame(source.get(0), gameProgress1);
         saveGame(source.get(1), gameProgress2);
         saveGame(source.get(2), gameProgress3);
-        zipFiles("d:\\Games\\savegames\\gameProgress.zip", source);
+        zipFiles(prefix + "gameProgress.zip", source);
         delete();
     }
 
     public static void delete() {
-        File dir = new File("d:\\Games\\savegames");
-        if(dir.isDirectory()){
+        File dir = new File(prefix);
+        if (dir.isDirectory()) {
             for (File item : dir.listFiles()) {
-                if(item.isFile() & !item.getName().equals("gameProgress.zip")){
+                if (item.isFile() & !item.getName().equals("gameProgress.zip")) {
                     item.delete();
                 }
             }
